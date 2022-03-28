@@ -24,9 +24,9 @@ number_of_enemies=5
 
 for i in range(number_of_enemies):
     enemy.append(pygame.image.load('enemy.png').convert_alpha())
-    enemyx.append(random.randint(90,720))
+    enemyx.append(random.randint(100,720))
     enemyy.append(random.randint(0,360))
-    enemyy_change.append(0.2)
+    enemyy_change.append(0.5)
     enemyx_change.append(20)
 
 # bullet information
@@ -80,9 +80,9 @@ while running:
         # giving keyboard control to player(UP and DOWN arrow key)
         if(event.type==pygame.KEYDOWN):
             if(event.key==pygame.K_UP):
-                player_change-=0.1    
+                player_change-=0.35    
             if(event.key==pygame.K_DOWN):
-                player_change+=0.1 
+                player_change+=0.35
         if(event.type==pygame.KEYUP):
             if(event.key==pygame.K_UP or event.key==pygame.K_DOWN):
                 player_change=0
@@ -115,10 +115,10 @@ while running:
             game_over_show()
             break
         if(enemyy[i]<0):
-            enemyy_change[i]=0.2
+            enemyy_change[i]=0.5
             enemyx[i]-=enemyx_change[i]
         elif(enemyy[i]>365):
-            enemyy_change[i]= -0.2
+            enemyy_change[i]= -0.5
             enemyx[i]-=enemyx_change[i]
         enemyy[i]+=enemyy_change[i]
         condition=iscollision(bulletx,bullety,enemyx[i],enemyy[i])
@@ -126,7 +126,7 @@ while running:
             bullety=190
             bulletx=30
             bullet_state="ready"
-            enemyx[i]=random.randint(90,720)
+            enemyx[i]=random.randint(100,720)
             enemyy[i]=random.randint(0,360)
             total_score+=1
             collision_sound=mixer.Sound('explosion.wav')
